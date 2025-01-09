@@ -5,16 +5,21 @@ from typing import List
 Vector = List[float]
 
 
-def add(v1: Vector, v2: Vector) -> Vector:
+def add_vector(v1: Vector, v2: Vector) -> Vector:
     return [x + y for x, y in zip(v1, v2)]
 
 
-def subtract(v1: Vector, v2: Vector) -> Vector:
+def subtract_vector(v1: Vector, v2: Vector) -> Vector:
     return [x - y for x, y in zip(v1, v2)]
 
 
 def vector_sum(vectors: List[Vector]) -> Vector:
     return [sum(components) for components in zip(*vectors)]
+
+
+def vector_mean(vectors: List[Vector]) -> Vector:
+    n = len(vectors)
+    return [sum(components) / n for components in zip(*vectors)]
 
 
 def plot_vectors(vectors: List[Vector], colors=None, labels=None, title="Vector Plot"):
@@ -83,8 +88,9 @@ if __name__ == "__main__":
     v2 = [2, 1]
     v3 = [3, 3]
     sum_v = vector_sum([v1, v2, v3])
-    vectors: List[Vector] = [v1, v2, v3, sum_v]
-    colors = ["r", "g", "b", "m"]
-    labels = ["v1", "v2", "v3", "v1 + v2 + v3"]
-    plot_vectors(vectors, colors, labels, title="Vector Sum")
+    mean_v = vector_mean([v1, v2, v3])
+    vectors: List[Vector] = [v1, v2, v3, sum_v, mean_v]
+    colors = ["r", "g", "b", "m", "c"]
+    labels = ["v1", "v2", "v3", "v1 + v2 + v3", "mean(v1, v2, v3)"]
+    plot_vectors(vectors, colors, labels, title="Vector Sum and Mean")
     print("Vector plot saved as vector_plot.png")
