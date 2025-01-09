@@ -64,8 +64,8 @@ def plot_data_science_mentions(years: List[int], mentions: List[int]):
     plt.xticks(years)
     plt.ylabel("# of times I heard someone say 'data science'")
     plt.ticklabel_format(useOffset=False)
-    plt.axis([2016.5, 2018.5, 499, 506])
-    plt.title("Look at the 'Huge' Increase!")
+    plt.axis([2016.5, 2018.5, 0, 500])
+    plt.title("Not So Huge Anymore")
     plt.savefig("data_science_mentions.png", dpi=300)
     plt.close()
 
