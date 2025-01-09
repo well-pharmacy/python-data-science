@@ -1,33 +1,24 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
 from typing import List
 
 Vector = List[float]
 
 
 def add_vectors(v1: Vector, v2: Vector) -> Vector:
-    """
-    Adds two vectors component-wise.
-
-    Parameters:
-    v1 (Vector): First vector.
-    v2 (Vector): Second vector.
-
-    Returns:
-    Vector: Sum of the two vectors.
-    """
-    if len(v1) != len(v2):
-        raise ValueError("Vectors must have the same length.")
-    return [v1_i + v2_i for v1_i, v2_i in zip(v1, v2)]
+    return [x + y for x, y in zip(v1, v2)]
 
 
-def plot_vectors(vectors, colors=None, labels=None, title="Vector Plot"):
+def subtract_vectors(v1: Vector, v2: Vector) -> Vector:
+    return [x - y for x, y in zip(v1, v2)]
+
+
+def plot_vectors(vectors: List[Vector], colors=None, labels=None, title="Vector Plot"):
     """
     Plots vectors in 2D space.
 
     Parameters:
-    vectors (list of tuples): List of vectors to plot. Each vector is a tuple (x, y).
+    vectors (list of vectors): List of vectors to plot. Each vector is a tuple (x, y).
     colors (list of str): List of colors for each vector. Default is None.
     labels (list of str): List of labels for each vector. Default is None.
     title (str): Title of the plot. Default is "Vector Plot".
@@ -87,8 +78,9 @@ if __name__ == "__main__":
     v1 = [1, 2]
     v2 = [2, 1]
     sum_v = add_vectors(v1, v2)
-    vectors: List[Vector] = [v1, v2, sum_v]
-    colors = ["r", "g", "b"]
-    labels = ["v1", "v2", "v3"]
-    plot_vectors(vectors, colors, labels)
+    diff_v = subtract_vectors(v1, v2)
+    vectors: List[Vector] = [v1, v2, sum_v, diff_v]
+    colors = ["r", "g", "b", "m"]
+    labels = ["v1", "v2", "v1 + v2", "v1 - v2"]
+    plot_vectors(vectors, colors, labels, title="Vector Addition and Subtraction")
     print("Vector plot saved as vector_plot.png")
