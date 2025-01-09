@@ -5,12 +5,16 @@ from typing import List
 Vector = List[float]
 
 
-def add_vectors(v1: Vector, v2: Vector) -> Vector:
+def add(v1: Vector, v2: Vector) -> Vector:
     return [x + y for x, y in zip(v1, v2)]
 
 
-def subtract_vectors(v1: Vector, v2: Vector) -> Vector:
+def subtract(v1: Vector, v2: Vector) -> Vector:
     return [x - y for x, y in zip(v1, v2)]
+
+
+def vector_sum(vectors: List[Vector]) -> Vector:
+    return [sum(components) for components in zip(*vectors)]
 
 
 def plot_vectors(vectors: List[Vector], colors=None, labels=None, title="Vector Plot"):
@@ -77,10 +81,10 @@ def plot_vectors(vectors: List[Vector], colors=None, labels=None, title="Vector 
 if __name__ == "__main__":
     v1 = [1, 2]
     v2 = [2, 1]
-    sum_v = add_vectors(v1, v2)
-    diff_v = subtract_vectors(v1, v2)
-    vectors: List[Vector] = [v1, v2, sum_v, diff_v]
+    v3 = [3, 3]
+    sum_v = vector_sum([v1, v2, v3])
+    vectors: List[Vector] = [v1, v2, v3, sum_v]
     colors = ["r", "g", "b", "m"]
-    labels = ["v1", "v2", "v1 + v2", "v1 - v2"]
-    plot_vectors(vectors, colors, labels, title="Vector Addition and Subtraction")
+    labels = ["v1", "v2", "v3", "v1 + v2 + v3"]
+    plot_vectors(vectors, colors, labels, title="Vector Sum")
     print("Vector plot saved as vector_plot.png")
