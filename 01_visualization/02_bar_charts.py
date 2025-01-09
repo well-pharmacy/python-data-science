@@ -52,10 +52,32 @@ def plot_grade_distribution(grades: List[int]):
     plt.close()
 
 
+def plot_data_science_mentions(years: List[int], mentions: List[int]):
+    """
+    Plots a bar chart of mentions of 'data science' over the years.
+
+    Parameters:
+    years (list of int): List of years.
+    mentions (list of int): List of mentions of 'data science'.
+    """
+    plt.bar(years, mentions, 0.8)
+    plt.xticks(years)
+    plt.ylabel("# of times I heard someone say 'data science'")
+    plt.ticklabel_format(useOffset=False)
+    plt.axis([2016.5, 2018.5, 499, 506])
+    plt.title("Look at the 'Huge' Increase!")
+    plt.savefig("data_science_mentions.png", dpi=300)
+    plt.close()
+
+
 if __name__ == "__main__":
     movies = ["Annie Hall", "Ben-Hur", "Casablanca", "Gandhi", "West Side Story"]
     num_oscars = [5, 11, 3, 8, 10]
-    plot_movie_oscars(movies, num_oscars)
+    plot_movie_oscars(movies, num_oscars, "Favorite Movies", "favorite_movies.png")
 
     grades = [83, 95, 91, 87, 70, 0, 85, 82, 100, 67, 73, 77, 0]
     plot_grade_distribution(grades)
+
+    years = [2017, 2018]
+    mentions = [500, 505]
+    plot_data_science_mentions(years, mentions)
