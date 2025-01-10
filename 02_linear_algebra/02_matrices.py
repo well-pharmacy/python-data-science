@@ -3,6 +3,7 @@ from typing import List, Tuple, Callable
 Matrix = List[List[float]]
 Vector = List[float]
 
+
 def shape(A: Matrix) -> Tuple[int, int]:
     """
     Returns the number of rows and columns of the matrix A.
@@ -17,6 +18,7 @@ def shape(A: Matrix) -> Tuple[int, int]:
     num_cols = len(A[0]) if A else 0
     return num_rows, num_cols
 
+
 def get_row(A: Matrix, i: int) -> Vector:
     """
     Returns the i-th row of the matrix A.
@@ -29,6 +31,7 @@ def get_row(A: Matrix, i: int) -> Vector:
     Vector: The i-th row of the matrix.
     """
     return A[i]
+
 
 def get_column(A: Matrix, j: int) -> Vector:
     """
@@ -43,7 +46,10 @@ def get_column(A: Matrix, j: int) -> Vector:
     """
     return [A_i[j] for A_i in A]
 
-def make_matrix(num_rows: int, num_cols: int, entry_fn: Callable[[int, int], float]) -> Matrix:
+
+def make_matrix(
+    num_rows: int, num_cols: int, entry_fn: Callable[[int, int], float]
+) -> Matrix:
     """
     Creates a num_rows x num_cols matrix where the (i, j)-th entry is entry_fn(i, j).
 
@@ -57,6 +63,20 @@ def make_matrix(num_rows: int, num_cols: int, entry_fn: Callable[[int, int], flo
     """
     return [[entry_fn(i, j) for j in range(num_cols)] for i in range(num_rows)]
 
+
+def identity_matrix(n: int) -> Matrix:
+    """
+    Returns an n x n identity matrix.
+
+    Args:
+    n (int): The size of the identity matrix.
+
+    Returns:
+    Matrix: An n x n identity matrix.
+    """
+    return make_matrix(n, n, lambda i, j: 1 if i == j else 0)
+
+
 # Example usage:
 # A = [
 #     [1, 2],
@@ -69,6 +89,9 @@ def make_matrix(num_rows: int, num_cols: int, entry_fn: Callable[[int, int], flo
 
 # def entry_fn(i: int, j: int) -> float:
 #     return i * j
-# 
+#
 # matrix = make_matrix(3, 3, entry_fn)
 # print(matrix)  # Output: [[0, 0, 0], [0, 1, 2], [0, 2, 4]]
+
+# identity = identity_matrix(3)
+# print(identity)  # Output: [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
