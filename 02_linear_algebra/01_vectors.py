@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from typing import List
+import math
 
 Vector = List[float]
 
@@ -24,6 +25,19 @@ def vector_mean(vectors: List[Vector]) -> Vector:
 
 def scalar_multiply(c: float, v: Vector) -> Vector:
     return [c * x for x in v]
+
+
+def sum_of_squares(v: Vector) -> float:
+    return sum(x * x for x in v)
+
+def magnitude(v: Vector) -> float:
+    return math.sqrt(sum_of_squares(v))
+
+def squared_distance(v: Vector, w: Vector) -> float:
+    return sum_of_squares(subtract(v, w))
+
+def distance(v: Vector, w: Vector) -> float:
+    return magnitude(subtract(v, w))
 
 
 def plot_vectors(vectors: List[Vector], colors=None, labels=None, title="Vector Plot"):
