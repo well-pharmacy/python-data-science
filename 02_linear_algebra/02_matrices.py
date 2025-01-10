@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Callable
 
 Matrix = List[List[float]]
 Vector = List[float]
@@ -43,6 +43,20 @@ def get_column(A: Matrix, j: int) -> Vector:
     """
     return [A_i[j] for A_i in A]
 
+def make_matrix(num_rows: int, num_cols: int, entry_fn: Callable[[int, int], float]) -> Matrix:
+    """
+    Creates a num_rows x num_cols matrix where the (i, j)-th entry is entry_fn(i, j).
+
+    Args:
+    num_rows (int): The number of rows in the matrix.
+    num_cols (int): The number of columns in the matrix.
+    entry_fn (Callable[[int, int], float]): A function that takes two integers (i, j) and returns the value for the (i, j)-th entry.
+
+    Returns:
+    Matrix: A matrix represented as a list of lists.
+    """
+    return [[entry_fn(i, j) for j in range(num_cols)] for i in range(num_rows)]
+
 # Example usage:
 # A = [
 #     [1, 2],
@@ -52,3 +66,9 @@ def get_column(A: Matrix, j: int) -> Vector:
 # print(shape(A))  # Output: (3, 2)
 # print(get_row(A, 1))  # Output: [3, 4]
 # print(get_column(A, 1))  # Output: [2, 4, 6]
+
+# def entry_fn(i: int, j: int) -> float:
+#     return i * j
+# 
+# matrix = make_matrix(3, 3, entry_fn)
+# print(matrix)  # Output: [[0, 0, 0], [0, 1, 2], [0, 2, 4]]
